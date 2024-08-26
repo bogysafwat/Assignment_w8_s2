@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Assignment_w8_s2</string>
+    <string name="botton">Want to read</string>
+    <string name="my_name">Abdelrahman Swafwat\n</string>
+    <string name="reviews">Reviews</string>
+    <string name="favorite">Favorite</string>
+    <string name="search">Search\n</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings\n</string>
+    <string name="books">Books</string>
+    <string name="notification">Notification</string>
+    <string name="notifcation_clicked">Notification Clicked</string>
+    <string name="review_clicked">Review Clicked</string>
+    <string name="favorite_clicked">Favotite Clicked</string>
+    <string name="search_clicked">Search Clicked</string>
+    <string name="profile_clicked">"Profile Clicked "</string>
+    <string name="settings_clicked">Settings Cliicked</string>
+</resources>
