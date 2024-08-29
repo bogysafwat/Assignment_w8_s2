@@ -8,21 +8,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.assignment_w8_s2.databinding.ItemBookBinding
 
-class BookAdapter(val books:List<Books>):RecyclerView.Adapter<BookAdapter.BookViewHolder>(){
-    class BookViewHolder(val row:View):RecyclerView.ViewHolder(row){
-        val tvTitel=row.findViewById<TextView>(R.id.tv_title)
-        val tvAuther=row.findViewById<TextView>(R.id.tv_author)
-        val ivbook=row.findViewById<ImageView>(R.id.iv_book)
-        val bookrate=row.findViewById<RatingBar>(R.id.rating_bar)
+class BookAdapter(val books:List<Books>):ListAdapter<Books,BookAdapter.BookViewHolder>(BookItemDiffCallBack()){
+    class BookViewHolder(val binding: ItemBookBinding):RecyclerView.ViewHolder(binding.root){
+        companion object{
+            fun from (parent: ViewGroup):BookViewHolder{
+                val layoutInflater=LayoutInflater.from(parent.context)
+                val binding=ItemBookBinding.inflate(layoutInflater,parent,false)
+                return BookViewHolder(binding)
+            }
+        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        return BookViewHolder.from(parent)
 
-        val layout=LayoutInflater.from(parent.context).inflate(R.layout.item_book,parent,false)
-        return BookViewHolder(layout)
     }
 
     override fun getItemCount(): Int {
@@ -30,10 +35,17 @@ class BookAdapter(val books:List<Books>):RecyclerView.Adapter<BookAdapter.BookVi
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-       val book=books.get(position)
-        holder.tvTitel.text=book.title
-        holder.tvAuther.text=book.author
-        holder.ivbook.setImageDrawable(holder.ivbook.context.getDrawable(book.imge))
-        holder.bookrate.rating=book.rating
+      holder.binding.book=books.get(position)
     }
+}
+
+class BookItemDiffCallBack:DiffUtil.ItemCallback<Books>() {
+    override fun areItemsTheSame(oldItem: Books, newItem: Books): Boolean {
+        return oldItem==newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Books, newItem: Books): Boolean {
+     return oldItem==newItem
+    }
+
 }
